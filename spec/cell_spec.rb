@@ -28,4 +28,14 @@ RSpec.describe Cell do
       end
     end
   end 
+
+  describe 'set alive' do
+    context 'when the cell is dead' do
+      cell = Cell.new(alive: false)
+      it 'sets cell.alive? to true' do
+        cell.set_alive
+        expect(cell.alive?).to be true
+      end
+    end
+  end
 end

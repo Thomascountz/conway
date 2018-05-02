@@ -24,17 +24,18 @@ RSpec.describe Colony do
     end
   end
 
+  # May fail: testing random
   describe '#inoculate' do
-    xit 'returns a new colony with about 33% alive cells' do
-      colony = Colony.new
-      
+    it 'sets about 33% of its cells to alive at random' do
+      colony = Colony.new(rows: 100, columns: 100)
+
       colony.inoculate
 
       total_cell_count = colony.cells.flatten.length.to_f
       alive_cell_count = colony.cells.flatten.select(&:alive?).length.to_f
       percentage_of_alive_cells = (alive_cell_count / total_cell_count) * 100      
 
-      expect(percentage_of_alive_cells).to be_within(1).of(33.33)
+      expect(percentage_of_alive_cells).to be_within(2).of(33.33)
     end
   end
 end

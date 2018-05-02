@@ -15,12 +15,19 @@ class Colony
     end
   end
 
-  # def inoculate
-  #   @cells.flatten.each do |cell|
-  #     if rand(1..10) == 3 
-  #       cell.set_alive
-  #     end
-  #   end
-  # end
+  def inoculate
+    @cells.flatten.each do |cell|
+      if randomly_selected?
+        cell.set_alive
+      end
+    end
+    self
+  end
+
+  private
+
+  def randomly_selected?
+    rand(1..3) == 1
+  end
 
 end

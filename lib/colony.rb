@@ -23,6 +23,12 @@ class Colony
     end
   end
 
+  def incubate
+    cells.flatten.each do |cell|
+      cell.set_alive
+    end
+  end
+
   private
 
   def randomly_selected?

@@ -41,9 +41,18 @@ RSpec.describe Colony do
 
   describe '#incubate' do
     describe 'determining the status of each cell in the colony' do
-      context 'if the cell is dead' do
+      context 'if a cell is dead' do
+        colony = Colony.new(rows: 3, columns: 3)
+        center_cell = colony.cells[1][1]
+        center_cell.set_dead
         context 'if exactly three of its neighbors are alive' do
-          xit 'is alive after incubation'
+          colony.cells[0][0].set_alive
+          colony.cells[0][1].set_alive
+          colony.cells[0][2].set_alive
+          it 'is alive after incubation' do
+            colony.incubate
+            expect(center_cell).to be_alive
+          end
         end
         context 'if exactly three of its neighbors are not alive' do
           xit 'remains dead after incubation'

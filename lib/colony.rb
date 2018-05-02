@@ -16,12 +16,11 @@ class Colony
   end
 
   def inoculate
-    @cells.flatten.each do |cell|
+    cells.flatten.each do |cell|
       if randomly_selected?
         cell.set_alive
       end
     end
-    self
   end
 
   private

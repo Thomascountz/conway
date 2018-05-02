@@ -14,4 +14,8 @@ class Cell
   def set_alive
     @alive = true
   end
+
+  def set_dead
+    @alive = false
+  end
 end

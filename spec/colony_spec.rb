@@ -38,4 +38,31 @@ RSpec.describe Colony do
       expect(percentage_of_alive_cells).to be_within(2).of(33.33)
     end
   end
+
+  describe '#incubate' do
+    describe 'determining the status of each cell in the colony' do
+      context 'if the cell is dead' do
+        context 'if exactly three of its neighbors are alive' do
+          xit 'is alive after incubation'
+        end
+        context 'if exactly three of its neighbors are not alive' do
+          xit 'remains dead after incubation'
+        end
+      end
+      context 'if the cell is alive' do
+        context 'if less than two its neighbors are alive' do
+          xit 'is dead after incubation'
+        end
+        context 'if two neighbors are alive' do
+          xit 'is dead after incubation'
+        end
+        context 'if three its neighbors are alive' do
+          xit 'is dead after incubation'
+        end
+        context 'if greater than three of its neighbors are alive' do
+          xit 'is dead after incubation'
+        end
+      end
+    end
+  end
 end

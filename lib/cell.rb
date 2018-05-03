@@ -1,10 +1,10 @@
 class Cell
   
-  attr_reader :x, :y
+  attr_reader :row, :column
 
-  def initialize(x: nil, y: nil, alive: false)
-    @x = x
-    @y = y
+  def initialize(row: nil, column: nil, alive: false)
+    @row = row
+    @column = column
     @alive = alive
   end
 

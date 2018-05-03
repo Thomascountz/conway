@@ -8,10 +8,10 @@ class Colony
     @rows = rows
     @columns = columns
     @cells = []
-    @rows.times do |x|
+    @rows.times do |row_number|
       row = []
-      @columns.times do |y|
-        row << Cell.new(x: x, y: y, alive: false)
+      @columns.times do |column_number|
+        row << Cell.new(row: row_number, column: column_number, alive: false)
       end
       @cells << row
     end
@@ -28,7 +28,7 @@ class Colony
   def incubate
     new_colony = copy_colony
     cells.flatten.each do |cell|
-      new_cell = new_colony.cell_at(cell.x, cell.y)
+      new_cell = new_colony.cell_at(cell.row, cell.column)
       alive_neighbors = number_of_alive_neighbors(cell) 
       if alive_neighbors == 3 || (cell.alive? && alive_neighbors == 2)
         new_cell.set_alive
@@ -39,9 +39,9 @@ class Colony
     new_colony
   end
 
-  def cell_at(x, y)
-    if cells[x]
-      cells[x][y]
+  def cell_at(row, column)
+    if cells[row]
+      cells[row][column]
     else
       nil
     end
@@ -59,17 +59,17 @@ class Colony
   end
 
   def get_neighbors(cell)
-    x = cell.x
-    y = cell.y
+    row = cell.row
+    column = cell.column
     neighbors = []
-    neighbors << cell_at(x - 1, y - 1)
-    neighbors << cell_at(x - 1, y)
-    neighbors << cell_at(x - 1, y + 1)
-    neighbors << cell_at(x, y - 1)
-    neighbors << cell_at(x, y + 1)
-    neighbors << cell_at(x + 1, y - 1)
-    neighbors << cell_at(x + 1, y)
-    neighbors << cell_at(x + 1, y + 1)
+    neighbors << cell_at(row - 1, column - 1)
+    neighbors << cell_at(row - 1, column)
+    neighbors << cell_at(row - 1, column + 1)
+    neighbors << cell_at(row, column - 1)
+    neighbors << cell_at(row, column + 1)
+    neighbors << cell_at(row + 1, column - 1)
+    neighbors << cell_at(row + 1, column)
+    neighbors << cell_at(row + 1, column + 1)
     neighbors.compact
   end
 

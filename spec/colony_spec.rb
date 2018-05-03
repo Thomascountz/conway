@@ -90,6 +90,13 @@ RSpec.describe Colony do
             column = 1
             center_cell = colony.cells[row][column]
             center_cell.set_alive
+            colony.cells[0][0].set_dead
+            colony.cells[0][1].set_dead
+            colony.cells[0][2].set_dead
+            colony.cells[1][0].set_dead
+            colony.cells[1][2].set_dead
+            colony.cells[2][0].set_dead
+            colony.cells[2][1].set_dead
 
             new_colony = colony.incubate
             new_center_cell = new_colony.cells[row][column]

@@ -29,8 +29,8 @@ class Colony
     new_colony = copy_colony
     cells.flatten.each do |cell|
       new_cell = new_colony.cell_at(cell.row, cell.column)
-      alive_neighbors = number_of_alive_neighbors(cell) 
-      if alive_neighbors == 3 || (cell.alive? && alive_neighbors == 2)
+      alive_neighbor_count = number_of_alive_neighbors(cell) 
+      if alive_neighbor_count == 3 || (cell.alive? && alive_neighbor_count == 2)
         new_cell.set_alive
       else
         new_cell.set_dead
@@ -54,11 +54,11 @@ class Colony
   end
 
   def number_of_alive_neighbors(cell)
-    neighbors = get_neighbors(cell)
+    neighbors = get_immediate_neighbors(cell)
     neighbors.select(&:alive?).count
   end
 
-  def get_neighbors(cell)
+  def get_immediate_neighbors(cell)
     row = cell.row
     column = cell.column
     neighbors = []

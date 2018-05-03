@@ -30,6 +30,8 @@ class Colony
     cells.flatten.each do |cell|
       if cell.dead? && number_of_alive_neighbors(cell) == 3
         new_colony.cell_at(cell.x, cell.y).set_alive
+      elsif cell.alive? && (number_of_alive_neighbors(cell) > 1 && number_of_alive_neighbors(cell) < 4)
+        new_colony.cell_at(cell.x, cell.y).set_alive
       end
     end
     new_colony
@@ -48,7 +50,7 @@ class Colony
   def randomly_selected?
     rand(1..3) == 1
   end
-  
+
   def number_of_alive_neighbors(cell)
     neighbors = get_neighbors(cell)
     neighbors.select(&:alive?).count

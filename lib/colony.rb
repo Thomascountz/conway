@@ -1,5 +1,3 @@
-require 'cell'
-
 class Colony
 
   attr_reader :cells
@@ -40,7 +38,7 @@ class Colony
   end
 
   def cell_at(row, column)
-    if cells[row]
+    if row >= 0 && column >=0 && cells[row]
       cells[row][column]
     else
       nil

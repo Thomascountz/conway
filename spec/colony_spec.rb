@@ -160,5 +160,30 @@ RSpec.describe Colony do
         end
       end
     end
+
+    context 'when a dead cell has three alive neighbors beyond the borders of the colony' do
+      it 'considers those neighbors dead' do
+        colony = Colony.new(rows: 3, columns: 3)
+        row = 0
+        column = 0
+        corner_cell = colony.cells[row][column]
+        corner_cell.death
+
+        colony.cells[2][1].birth
+        colony.cells[2][0].birth
+        colony.cells[2][2].birth
+
+        colony.cells[0][2].death
+        colony.cells[1][2].death
+        colony.cells[0][1].death
+        colony.cells[1][1].death
+        colony.cells[1][0].death
+
+        new_colony = colony.incubate
+        new_center_cell = new_colony.cells[row][column]
+
+        expect(new_center_cell).to be_dead
+      end
+    end
   end
 end

@@ -40,24 +40,27 @@ RSpec.describe Colony do
   end
 
   describe '#incubate' do
-    describe 'determining the status of each cell in the colony' do
+    describe 'determining the status of each cell in the new colony' do
       context 'if a cell is dead' do
         context 'if exactly three of its neighbors are alive' do
-          it 'is alive after incubation' do
+          it 'sets that cell alive in the new colony' do
             colony = Colony.new(rows: 3, columns: 3)
-            center_cell = colony.cells[1][1]
+            row = 1
+            column = 1
+            center_cell = colony.cells[row][column]
             center_cell.set_dead
             colony.cells[0][0].set_alive
             colony.cells[0][1].set_alive
             colony.cells[0][2].set_alive
             
-            colony.incubate
+            new_colony = colony.incubate
+            new_center_cell = new_colony.cells[row][column]
 
-            expect(center_cell).to be_alive
+            expect(new_center_cell).to be_alive
           end
         end
         context 'if exactly three of its neighbors are not alive' do
-          xit 'remains dead after incubation' do
+          it 'remains dead in the new colony' do
             colony = Colony.new(rows: 3, columns: 3)
             center_cell = colony.cells[1][1]
             center_cell.set_dead
@@ -73,16 +76,16 @@ RSpec.describe Colony do
       end
       context 'if the cell is alive' do
         context 'if less than two its neighbors are alive' do
-          xit 'is dead after incubation'
+          xit 'is dead in the new colony'
         end
         context 'if two neighbors are alive' do
-          xit 'is dead after incubation'
+          xit 'is dead in the new colony'
         end
         context 'if three its neighbors are alive' do
-          xit 'is dead after incubation'
+          xit 'is dead in the new colony'
         end
         context 'if greater than three of its neighbors are alive' do
-          xit 'is dead after incubation'
+          xit 'is dead in the new colony'
         end
       end
     end

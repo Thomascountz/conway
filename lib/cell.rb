@@ -16,11 +16,11 @@ class Cell
     !@alive
   end
 
-  def set_alive
+  def birth
     @alive = true
   end
 
-  def set_dead
+  def death
     @alive = false
   end
 end

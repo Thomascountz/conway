@@ -20,7 +20,7 @@ class Colony
   def inoculate
     cells.flatten.each do |cell|
       if randomly_selected?
-        cell.set_alive
+        cell.birth
       end
     end
   end
@@ -31,9 +31,9 @@ class Colony
       new_cell = new_colony.cell_at(cell.row, cell.column)
       alive_neighbor_count = number_of_alive_neighbors(cell) 
       if alive_neighbor_count == 3 || (cell.alive? && alive_neighbor_count == 2)
-        new_cell.set_alive
+        new_cell.birth
       else
-        new_cell.set_dead
+        new_cell.death
       end
     end
     new_colony

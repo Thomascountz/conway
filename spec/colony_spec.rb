@@ -50,10 +50,10 @@ RSpec.describe Colony do
             row = 1
             column = 1
             center_cell = colony.cells[row][column]
-            center_cell.set_dead
-            colony.cells[0][0].set_alive
-            colony.cells[0][1].set_alive
-            colony.cells[0][2].set_alive
+            center_cell.death
+            colony.cells[0][0].birth
+            colony.cells[0][1].birth
+            colony.cells[0][2].birth
             
             new_colony = colony.incubate
             new_center_cell = new_colony.cells[row][column]
@@ -68,10 +68,10 @@ RSpec.describe Colony do
             row = 1
             column = 1
             center_cell = colony.cells[row][column]
-            center_cell.set_dead
-            colony.cells[0][0].set_dead
-            colony.cells[0][1].set_dead
-            colony.cells[0][2].set_dead
+            center_cell.death
+            colony.cells[0][0].death
+            colony.cells[0][1].death
+            colony.cells[0][2].death
             
             new_colony = colony.incubate
             new_center_cell = new_colony.cells[row][column]
@@ -89,14 +89,14 @@ RSpec.describe Colony do
             row = 1
             column = 1
             center_cell = colony.cells[row][column]
-            center_cell.set_alive
-            colony.cells[0][0].set_dead
-            colony.cells[0][1].set_dead
-            colony.cells[0][2].set_dead
-            colony.cells[1][0].set_dead
-            colony.cells[1][2].set_dead
-            colony.cells[2][0].set_dead
-            colony.cells[2][1].set_dead
+            center_cell.birth
+            colony.cells[0][0].death
+            colony.cells[0][1].death
+            colony.cells[0][2].death
+            colony.cells[1][0].death
+            colony.cells[1][2].death
+            colony.cells[2][0].death
+            colony.cells[2][1].death
 
             new_colony = colony.incubate
             new_center_cell = new_colony.cells[row][column]
@@ -111,9 +111,9 @@ RSpec.describe Colony do
             row = 1
             column = 1
             center_cell = colony.cells[row][column]
-            center_cell.set_alive
-            colony.cells[0][0].set_alive
-            colony.cells[0][1].set_alive
+            center_cell.birth
+            colony.cells[0][0].birth
+            colony.cells[0][1].birth
             
             new_colony = colony.incubate
             new_center_cell = new_colony.cells[row][column]
@@ -128,10 +128,10 @@ RSpec.describe Colony do
             row = 1
             column = 1
             center_cell = colony.cells[row][column]
-            center_cell.set_alive
-            colony.cells[0][0].set_alive
-            colony.cells[0][1].set_alive
-            colony.cells[0][2].set_alive
+            center_cell.birth
+            colony.cells[0][0].birth
+            colony.cells[0][1].birth
+            colony.cells[0][2].birth
             
             new_colony = colony.incubate
             new_center_cell = new_colony.cells[row][column]
@@ -146,11 +146,11 @@ RSpec.describe Colony do
             row = 1
             column = 1
             center_cell = colony.cells[row][column]
-            center_cell.set_alive
-            colony.cells[0][0].set_alive
-            colony.cells[0][1].set_alive
-            colony.cells[0][2].set_alive
-            colony.cells[1][0].set_alive
+            center_cell.birth
+            colony.cells[0][0].birth
+            colony.cells[0][1].birth
+            colony.cells[0][2].birth
+            colony.cells[1][0].birth
             
             new_colony = colony.incubate
             new_center_cell = new_colony.cells[row][column]

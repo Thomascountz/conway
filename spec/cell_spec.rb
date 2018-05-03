@@ -29,21 +29,21 @@ RSpec.describe Cell do
     end
   end 
 
-  describe '#set_alive' do
+  describe '#birth' do
     context 'when the cell is dead' do
       cell = Cell.new(alive: false)
       it 'sets cell.alive? to true' do
-        cell.set_alive
+        cell.birth
         expect(cell.alive?).to be true
       end
     end
   end
   
-  describe '#set_dead' do
+  describe '#death' do
     context 'when the cell is alive' do
       cell = Cell.new(alive: true)
       it 'sets cell.dead? to true' do
-        cell.set_dead
+        cell.death
         expect(cell.dead?).to be true
       end
     end

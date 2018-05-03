@@ -28,13 +28,12 @@ class Colony
   def incubate
     new_colony = copy_colony
     cells.flatten.each do |cell|
+      new_cell = new_colony.cell_at(cell.x, cell.y)
       alive_neighbors = number_of_alive_neighbors(cell) 
-      cell_x = cell.x
-      cell_y = cell.y
       if alive_neighbors == 3 || (cell.alive? && alive_neighbors == 2)
-        new_colony.cell_at(cell_x, cell_y).set_alive
+        new_cell.set_alive
       else
-        new_colony.cell_at(cell_x, cell_y).set_dead
+        new_cell.set_dead
       end
     end
     new_colony

@@ -24,8 +24,15 @@ class Colony
   end
 
   def incubate
-    cells.flatten.each do |cell|
-      cell.set_alive
+    cells.each_with_index do |row_of_cells, row_number|
+      row_of_cells.each_with_index do |cell, column_number|
+        neighbors = get_neighbors(row_number, column_number)
+        puts neighbors.select(&:alive?).count
+        puts cell.alive?
+        if cell.dead? && neighbors.select(&:alive?).count == 3
+        cell.set_alive
+        end
+      end
     end
   end
 
@@ -34,5 +41,27 @@ class Colony
   def randomly_selected?
     rand(1..3) == 1
   end
+
+  def get_neighbors(row_number, column_number)
+    neighbors = []
+    neighbors << cell_at(row_number - 1, column_number - 1)
+    neighbors << cell_at(row_number - 1, column_number)
+    neighbors << cell_at(row_number - 1, column_number + 1)
+    neighbors << cell_at(row_number, column_number - 1)
+    neighbors << cell_at(row_number, column_number + 1)
+    neighbors << cell_at(row_number + 1, column_number - 1)
+    neighbors << cell_at(row_number + 1, column_number)
+    neighbors << cell_at(row_number + 1, column_number + 1)
+    neighbors.compact
+  end
+
+  def cell_at(row_number, column_number)
+    if cells[row_number]
+      cells[row_number][column_number]
+    else
+      nil
+    end
+  end
+
 
 end

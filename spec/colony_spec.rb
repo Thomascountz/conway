@@ -62,15 +62,18 @@ RSpec.describe Colony do
         context 'if exactly three of its neighbors are not alive' do
           it 'remains dead in the new colony' do
             colony = Colony.new(rows: 3, columns: 3)
-            center_cell = colony.cells[1][1]
+            row = 1
+            column = 1
+            center_cell = colony.cells[row][column]
             center_cell.set_dead
             colony.cells[0][0].set_dead
             colony.cells[0][1].set_dead
             colony.cells[0][2].set_dead
             
-            colony.incubate
+            new_colony = colony.incubate
+            new_center_cell = new_colony.cells[row][column]
 
-            expect(center_cell).to be_dead
+            expect(new_center_cell).to be_dead
           end
         end
       end

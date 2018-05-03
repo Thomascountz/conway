@@ -8,10 +8,10 @@ class Colony
     @rows = rows
     @columns = columns
     @cells = []
-    @rows.times do
+    @rows.times do |x|
       row = []
-      @columns.times do 
-        row << Cell.new
+      @columns.times do |y|
+        row << Cell.new(x: x, y: y, alive: false)
       end
       @cells << row
     end
@@ -26,21 +26,18 @@ class Colony
   end
 
   def incubate
-    new_colony = self.class.new(rows: @rows, columns: @columns)
-    cells.each_with_index do |row_of_cells, row_number|
-      row_of_cells.each_with_index do |cell, column_number|
-        neighbors = get_neighbors(row_number, column_number)
-        if cell.dead? && neighbors.select(&:alive?).count == 3
-          new_colony.cell_at(row_number, column_number).set_alive
-        end
+    new_colony = copy_colony
+    cells.flatten.each do |cell|
+      if cell.dead? && number_of_alive_neighbors(cell) == 3
+        new_colony.cell_at(cell.x, cell.y).set_alive
       end
     end
     new_colony
   end
 
-  def cell_at(row_number, column_number)
-    if cells[row_number]
-      cells[row_number][column_number]
+  def cell_at(x, y)
+    if cells[x]
+      cells[x][y]
     else
       nil
     end
@@ -51,20 +48,29 @@ class Colony
   def randomly_selected?
     rand(1..3) == 1
   end
+  
+  def number_of_alive_neighbors(cell)
+    neighbors = get_neighbors(cell)
+    neighbors.select(&:alive?).count
+  end
 
-  def get_neighbors(row_number, column_number)
+  def get_neighbors(cell)
+    x = cell.x
+    y = cell.y
     neighbors = []
-    neighbors << cell_at(row_number - 1, column_number - 1)
-    neighbors << cell_at(row_number - 1, column_number)
-    neighbors << cell_at(row_number - 1, column_number + 1)
-    neighbors << cell_at(row_number, column_number - 1)
-    neighbors << cell_at(row_number, column_number + 1)
-    neighbors << cell_at(row_number + 1, column_number - 1)
-    neighbors << cell_at(row_number + 1, column_number)
-    neighbors << cell_at(row_number + 1, column_number + 1)
+    neighbors << cell_at(x - 1, y - 1)
+    neighbors << cell_at(x - 1, y)
+    neighbors << cell_at(x - 1, y + 1)
+    neighbors << cell_at(x, y - 1)
+    neighbors << cell_at(x, y + 1)
+    neighbors << cell_at(x + 1, y - 1)
+    neighbors << cell_at(x + 1, y)
+    neighbors << cell_at(x + 1, y + 1)
     neighbors.compact
   end
 
-
+  def copy_colony
+    self.class.new(rows: @rows, columns: @columns)
+  end
 
 end

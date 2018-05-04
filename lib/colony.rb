@@ -1,7 +1,6 @@
 require 'cell'
 
 class Colony
-
   attr_reader :cells
 
   def initialize(rows: 10, columns: 10)
@@ -21,6 +20,8 @@ class Colony
     cells.flatten.each do |cell|
       if randomly_selected?
         cell.birth
+      else
+        cell.death
       end
     end
   end
@@ -29,7 +30,7 @@ class Colony
     new_colony = copy_colony
     cells.flatten.each do |cell|
       new_cell = new_colony.cell_at(cell.row, cell.column)
-      alive_neighbor_count = number_of_alive_neighbors(cell) 
+      alive_neighbor_count = number_of_alive_neighbors(cell)
       if alive_neighbor_count == 3 || (cell.alive? && alive_neighbor_count == 2)
         new_cell.birth
       else
@@ -47,7 +48,7 @@ class Colony
     end
   end
 
-  private 
+  private
 
   def randomly_selected?
     rand(1..3) == 1
@@ -76,5 +77,4 @@ class Colony
   def copy_colony
     self.class.new(rows: @rows, columns: @columns)
   end
-
 end

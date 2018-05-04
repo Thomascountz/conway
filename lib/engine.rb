@@ -1,5 +1,5 @@
 class Engine
-  def initialize(colony:, renderer: ConsoleIO.new)
+  def initialize(colony:, renderer: ConsoleRenderer.new)
     @colony = colony
     @renderer = renderer
   end

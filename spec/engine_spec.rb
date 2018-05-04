@@ -1,14 +1,14 @@
 require 'engine.rb'
 require 'colony'
-require 'console_io'
+require 'console_renderer'
 
 RSpec.describe Engine do
   let(:colony) { instance_double(Colony) }
   let(:gen_1_colony) { instance_double(Colony) }
-  let(:consoleio) { instance_double(ConsoleIO) }
+  let(:console_renderer) { instance_double(ConsoleRenderer) }
 
   subject(:engine) { described_class.new(colony: colony,
-                                         renderer: consoleio) }
+                                         renderer: console_renderer) }
 
   describe '#play' do
     context 'when given one generation' do
@@ -16,7 +16,7 @@ RSpec.describe Engine do
       it 'renders and incubates the colony' do
         allow(colony).to receive(:incubate)
 
-        expect(consoleio).to receive(:render).with(colony)
+        expect(console_renderer).to receive(:render).with(colony)
 
         engine.play(num_of_generations)
       end
@@ -28,8 +28,8 @@ RSpec.describe Engine do
         allow(colony).to receive(:incubate).and_return(gen_1_colony)
         allow(gen_1_colony).to receive(:incubate)
 
-        expect(consoleio).to receive(:render).with(colony)
-        expect(consoleio).to receive(:render).with(gen_1_colony)
+        expect(console_renderer).to receive(:render).with(colony)
+        expect(console_renderer).to receive(:render).with(gen_1_colony)
 
         engine.play(num_of_generations)
       end
